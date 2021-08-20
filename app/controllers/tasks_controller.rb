@@ -6,6 +6,8 @@ class TasksController < ApplicationController
     def create
         @tasks = Task.new(tasks_params)
         @tasks.save
+
+        redirect_to tasks_path
     end
 
     def new
@@ -30,11 +32,12 @@ class TasksController < ApplicationController
 
     def delete
         @task = Task.find(params[:id])
-        @tasks.destroy(tasks_params)
+        @tasks.destroy
+        redirect_to tasks_path
     end
     private
     def tasks_params
-        params.require(:task).permit(:title, :details)
+        params.require(:task).permit(:title, :details,)
     end
 end
 
